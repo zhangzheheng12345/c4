@@ -97,6 +97,12 @@ void next()
         ++p;
         while (*p != 0 && *p != '\n') ++p;
       }
+      else if(*p == '*') {
+        ++p;
+        while(*p != 0 && *(++p) != 0 && (*(p - 1) != '*' || *p != '/')) ++p;
+        if(*p == 0) printf("%d: lose back wrapping after a multi-line comment\n", line);
+        else ++p;
+      }
       else {
         tk = Div;
         return;
